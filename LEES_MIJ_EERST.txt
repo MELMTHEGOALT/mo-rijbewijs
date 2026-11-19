@@ -1,0 +1,9 @@
+MO Rijbewijs - verbeterde registratie
+
+1. Supabase Dashboard > SQL Editor > New query: plak database.sql en klik Run.
+2. Supabase > Authentication > Providers > Email: zet Confirm email UIT voor directe registratie.
+3. Upload index.html en config.js naar je hosting (beide samen).
+4. Op Netlify kunnen nieuwe deploys geblokkeerd zijn zolang je account geen credits heeft. Wacht op de nieuwe cyclus of gebruik een andere hosting.
+5. Bewaar config.js met alleen de publieke publishable key. Nooit een service_role/secret key in de website plaatsen.
+
+Let op: dit ZIP-bestand past je live website of Supabase database niet automatisch aan.
