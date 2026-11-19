@@ -424,4 +424,57 @@ header .navbtn.active,header .navbtn:hover{background:#b7f568!important;color:#1
 .ax-note{color:#e4eae4;margin-top:24px}.ax-note a{color:#b7f568}
 .ax-sign-card[hidden]{display:none!important}
 #axion-version{display:inline-flex;align-items:center;padding:4px 9px;background:#b7f568;color:#17221c;font-size:11px;font-weight:900;border-radius:99px;letter-spacing:.07em;margin-left:9px}
-</style><script id="axion-branding">(function(){document.title='AXION DRIVE PRE 7 — Theorie B Vlaanderen';function update(){document.querySelectorAll('header').forEach(h=>{if(!h.querySelector('#axion-version')){let b=document.createElement('span');b.id='axion-version';b.textContent='PRE 7';h.querySelector('.brand, .logo, h1, .topbar')?.append(b)||h.prepend(b)}});document.querySelectorAll('header, #authPanel').forEach(e=>{const w=document.createTreeWalker(e,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(n.nodeValue.includes('MO Rijbewijs'))n.nodeValue=n.nodeValue.replaceAll('MO Rijbewijs','AXION DRIVE')}})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',update);else update()})();</script></body></html>
+</style>
+<style id="axion-pre71">
+:root{--ax-accent:#b7f568}
+#axion-build-label{position:fixed;top:10px;right:10px;z-index:2147483646;background:#b7f568;color:#152019;
+border:2px solid #17221c;border-radius:999px;padding:7px 12px;font:800 12px/1.2 system-ui,sans-serif;
+box-shadow:0 6px 22px #0006;letter-spacing:.06em;pointer-events:none}
+#axion-diagnostics{position:fixed;bottom:14px;left:14px;z-index:2147483645;max-width:min(420px,calc(100vw - 28px));
+background:#101719;color:#f0f8ef;border:1px solid #6d866d;border-radius:14px;padding:12px;
+box-shadow:0 10px 36px #0008;font:13px/1.5 system-ui,sans-serif}
+#axion-diagnostics[hidden]{display:none!important}
+#axion-diagnostics button{background:#b7f568;color:#17221c;border:0;border-radius:8px;padding:7px 10px;cursor:pointer;font-weight:700}
+#axion-diagnostics code{color:#b7f568}
+html[data-mo-theme="light"] body{background:#f5f7f5!important;color:#17211b!important}
+html[data-mo-theme="light"] header{background:#f4f7f2!important;color:#17211b!important}
+html[data-mo-theme="light"] #axion-build-label{background:#18241d;color:#d8ffa0;border-color:#d8ffa0}
+.ax-sign-picture img{display:block;max-width:100%;height:auto}
+@media(max-width:700px){#axion-build-label{top:auto;bottom:8px;right:8px;font-size:10px;padding:5px 8px}
+#axion-diagnostics{bottom:40px}}
+</style>
+<script id="axion-pre71-runtime">
+(function(){
+"use strict";
+const BUILD="PRE 7.1";
+document.title="AXION DRIVE | "+BUILD+" | Theorie B";
+function start(){
+  if(!document.getElementById("axion-build-label")){
+    const badge=document.createElement("div");badge.id="axion-build-label";badge.textContent="AXION DRIVE · "+BUILD;
+    badge.setAttribute("aria-label","Websiteversie "+BUILD);
+    document.body.appendChild(badge);
+  }
+  document.querySelectorAll("#authPanel h1,header h1,header .brand,header .logo").forEach(el=>{
+    if(el.children.length===0 && /MO Rijbewijs/i.test(el.textContent)) el.textContent=el.textContent.replace(/🚗\s*/g,"").replace(/MO Rijbewijs/gi,"AXION DRIVE");
+  });
+  const params=new URLSearchParams(location.search);
+  if(params.has("diagnose")){
+    const box=document.createElement("aside");box.id="axion-diagnostics";
+    box.innerHTML='<b>AXION DRIVE — PRE 7.1 controle</b><div id="axion-checks"></div><button type="button" id="axion-close-diagnostics">Sluiten</button>';
+    document.body.appendChild(box);
+    document.getElementById("axion-close-diagnostics").addEventListener("click",()=>box.hidden=true);
+    const checks=[
+      ["App",!!document.getElementById("app")],
+      ["Verkeersborden",typeof window.page==="function"],
+      ["Accountvenster",!!document.getElementById("authOverlay")],
+      ["Themaknop",!!document.getElementById("mo-theme-toggle")],
+      ["Configuratiebestand",typeof window.SUPABASE_URL!=="undefined"||typeof window.moClient!=="undefined"]
+    ];
+    document.getElementById("axion-checks").innerHTML=checks.map(([name,ok])=>'<div>'+ (ok?'✓':'!')+' '+name+': '+(ok?'aanwezig':'controle nodig')+'</div>').join("")
+      +'<div>Versie: <code>'+BUILD+'</code></div>';
+  }
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+</body></html>
